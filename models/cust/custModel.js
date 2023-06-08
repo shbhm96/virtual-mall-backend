@@ -2,16 +2,16 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs"
 
 const custSchema =  mongoose.Schema({
-    customer_name:{
+    name:{
         type:String,
         required:true
     },
-    customer_email:{
+    email:{
         type:String,
         required:true,
         unique:true
     },
-    customer_mobile:{
+    mobile:{
         type:Number,
         required:true,
         unique:true,

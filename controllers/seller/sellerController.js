@@ -1,13 +1,15 @@
 import asyncHandler from "express-async-handler";
 import Seller from "../../models/seller/sellerModel.js";
+import generateToken from "../../utils/generateToken.js";
 
 const authSeller = asyncHandler(async(req,res) => {    
     const {email,password} = req.body
 
-    const seller = await Seller.findOne({email})
+    const seller = await Seller.findOne({sellerEmail:email})
 
     if(seller && (await seller.matchPassword(password))){
-        return res.json({
+        console.log("seller data",seller)
+        return res.status(201).send({
             _id : seller._id,
             businessName:seller.businessName,
             sellerEmail:seller.sellerEmail, 
@@ -21,8 +23,6 @@ const authSeller = asyncHandler(async(req,res) => {
         res.status(401)
         throw new Error ('Invalid email or password')
     }
-
-    return res.send({email,password})
 })
 
 const registerSeller = asyncHandler(async(req,res) => {
@@ -35,16 +35,17 @@ const registerSeller = asyncHandler(async(req,res) => {
     const seller = await Seller.create({
         businessName, sellerEmail,businessOwnerName,password,sellerMobile,aadharNumber
     })
-    console.log("Create Use112r",user)
+    console.log("Create Use112r",seller)
     if(seller){
-        res.status(201).json({
+        console.log("Create seller8   `729")
+        return res.status(201).json({
             _id : ''+seller._id,
             businessName : ''+seller.businessName.toString(),
             businessOwnerName : ''+seller.businessOwnerName.toString(),
             sellerEmail:  ''+seller.sellerEmail.toString(),
             sellerMobile : seller.sellerMobile,
             aadharNumber:seller.aadharNumber,
-            url:seller.url,
+            url:seller.url && seller.url,
             isAdmin : seller.isAdmin,
             token : generateToken(seller._id)
         })
@@ -52,7 +53,6 @@ const registerSeller = asyncHandler(async(req,res) => {
         res.status(400)
         throw new Error("Invalid Seller Data")
     }
-    console.log("Create seller8   `729")
 })
 
 

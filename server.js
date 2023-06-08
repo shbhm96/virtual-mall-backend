@@ -7,6 +7,7 @@ import dotenv from "dotenv"
 import sellerRoutes from "./routes/seller/sellerRoutes.js"
 import custRoutes from "./routes/cust/custRoutes.js"
 import morgan from "morgan";
+import bodyParser from "body-parser";
 
 dotenv.config()
 
@@ -14,8 +15,9 @@ connectDB()
 
 const app = express()
 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:false}))
 app.use(cors())
-app.use(express.json())
 
 if(process.env.NODE_ENV==="development"){
     app.use(morgan("dev"))
@@ -24,7 +26,7 @@ if(process.env.NODE_ENV==="development"){
 app.use("/api/seller",sellerRoutes)
 app.use("/api/cust",custRoutes)
 app.use("/",(req,res)=>{
-    res.send("API IS RUNNING")
+    res.send("API IS RUNNING!!!!!!1!!")
 })
 
 const PORT = process.env.PORT || 5000

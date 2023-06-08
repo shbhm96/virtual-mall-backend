@@ -77,9 +77,13 @@ const sellerSchema = mongoose.Schema({
         required:true,
         unique:true
     },
+    isAdmin:{
+        type:Boolean,
+        default:false,
+        require:true
+    },
     url:{
         type:String,
-        required:true,
         default:""
     },
     rentPaid:{
