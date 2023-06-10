@@ -8,8 +8,7 @@ const authSeller = asyncHandler(async(req,res) => {
     const seller = await Seller.findOne({sellerEmail:email})
 
     if(seller && (await seller.matchPassword(password))){
-        console.log("seller data",seller)
-        return res.status(201).send({
+        return res.status(201).json({
             _id : seller._id,
             businessName:seller.businessName,
             sellerEmail:seller.sellerEmail, 

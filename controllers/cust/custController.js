@@ -9,7 +9,7 @@ const authCust = asyncHandler(async(req,res) => {
 
     if(cust && (await cust.matchPassword(password))){
         console.log(cust)
-        res.status(200).json({
+        return res.json({
             _id : cust._id,
             name : cust.name,
             email:cust.email, 
