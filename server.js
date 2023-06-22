@@ -3,11 +3,13 @@ import express from "express";
 import cors from "cors"
 import colors from 'colors';
 import dotenv from "dotenv"
+import morgan from "morgan";
+import bodyParser from "body-parser";
 
 import sellerRoutes from "./routes/seller/sellerRoutes.js"
 import custRoutes from "./routes/cust/custRoutes.js"
-import morgan from "morgan";
-import bodyParser from "body-parser";
+import sellerProducts from "./routes/seller/productsRoutes.js"
+
 
 dotenv.config()
 
@@ -24,6 +26,8 @@ if(process.env.NODE_ENV==="development"){
 }
 
 app.use("/api/seller",sellerRoutes)
+sellerRoutes.use("/products",sellerProducts)
+
 app.use("/api/cust",custRoutes)
 app.use("/",(req,res)=>{
     res.send("API IS RUNNING!!!!!!1!!")

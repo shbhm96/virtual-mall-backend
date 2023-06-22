@@ -43,6 +43,6 @@ custSchema.pre("save", async function (next) {
     }
     return next();
   });
-const Cust = mongoose.model("User",custSchema)
+const Cust = mongoose.model("Cust",custSchema)
 
 export default Cust

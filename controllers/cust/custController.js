@@ -58,7 +58,6 @@ const createCust = asyncHandler(async(req,res) => {
         mobile,
         password
     })
-    console.log("Create Use112r",cust)
     if(cust){
         res.status(201).json({
             _id : ''+cust._id,
