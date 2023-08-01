@@ -18,8 +18,9 @@ router.post("/register",registerSeller)
 router.get("/details/:id",sellerDetails)
 router.post("/getCustomers",protectValidSeller,getSellerCustomers)
 router.post("/getAllOrders",protectValidSeller,getAllOrders)
-router.get("/orderPaid",protectValidSeller,amountPaid)
-router.get("/orderDelivered",protectValidSeller,orderDelivered)
+router.get("/order/paid/:id",protectValidSeller,amountPaid)
+router.get("/order/delivered/:id",protectValidSeller,orderDelivered)
+router.get("/order")
 
 
 export default router

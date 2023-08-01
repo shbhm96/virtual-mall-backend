@@ -71,9 +71,8 @@ const updateProduct = asyncHandler(async (req, res) => {
   })
 
 const getSellerProduct = asyncHandler(async(req,res)=>{
-    const {id} = req.seller._id
-    console.log("seller Id",req.seller._id)
-    const products = await Product.find({ seller : req.seller._id})
+    console.log("seller Id",req.params.id)
+    const products = await Product.find({ seller : req.params.id})
 
     if(products){
         return res.json(products)
